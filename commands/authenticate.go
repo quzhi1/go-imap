@@ -7,8 +7,8 @@ import (
 	"io"
 	"strings"
 
-	"github.com/emersion/go-imap"
-	"github.com/emersion/go-sasl"
+	"github.com/quzhi1/go-imap"
+	"github.com/quzhi1/go-sasl"
 )
 
 // AuthenticateConn is a connection that supports IMAP authentication.

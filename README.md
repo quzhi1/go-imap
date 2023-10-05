@@ -1,18 +1,20 @@
 # go-imap
 
-[![godocs.io](https://godocs.io/github.com/emersion/go-imap?status.svg)](https://godocs.io/github.com/emersion/go-imap)
-[![builds.sr.ht status](https://builds.sr.ht/~emersion/go-imap/commits/master.svg)](https://builds.sr.ht/~emersion/go-imap/commits/master?)
+[![godocs.io](https://godocs.io/github.com/quzhi1/go-imap?status.svg)](https://godocs.io/github.com/quzhi1/go-imap)
+[![builds.sr.ht status](https://builds.sr.ht/~quzhi1/go-imap/commits/master.svg)](https://builds.sr.ht/~quzhi1/go-imap/commits/master?)
+
+This is my fork to emersion/go-imap
 
 An [IMAP4rev1](https://tools.ietf.org/html/rfc3501) library written in Go. It
 can be used to build a client and/or a server.
 
 > **Note**
 > This is the README for go-imap v1. go-imap v2 is in development, see the
-> [v2 branch](https://github.com/emersion/go-imap/tree/v2) for more details.
+> [v2 branch](https://github.com/quzhi1/go-imap/tree/v2) for more details.
 
 ## Usage
 
-### Client [![godocs.io](https://godocs.io/github.com/emersion/go-imap/client?status.svg)](https://godocs.io/github.com/emersion/go-imap/client)
+### Client [![godocs.io](https://godocs.io/github.com/quzhi1/go-imap/client?status.svg)](https://godocs.io/github.com/quzhi1/go-imap/client)
 
 ```go
 package main
@@ -20,8 +22,8 @@ package main
 import (
 	"log"
 
-	"github.com/emersion/go-imap/client"
-	"github.com/emersion/go-imap"
+	"github.com/quzhi1/go-imap/client"
+	"github.com/quzhi1/go-imap"
 )
 
 func main() {
@@ -95,7 +97,7 @@ func main() {
 }
 ```
 
-### Server [![godocs.io](https://godocs.io/github.com/emersion/go-imap/server?status.svg)](https://godocs.io/github.com/emersion/go-imap/server)
+### Server [![godocs.io](https://godocs.io/github.com/quzhi1/go-imap/server?status.svg)](https://godocs.io/github.com/quzhi1/go-imap/server)
 
 ```go
 package main
@@ -103,8 +105,8 @@ package main
 import (
 	"log"
 
-	"github.com/emersion/go-imap/server"
-	"github.com/emersion/go-imap/backend/memory"
+	"github.com/quzhi1/go-imap/server"
+	"github.com/quzhi1/go-imap/backend/memory"
 )
 
 func main() {
@@ -174,7 +176,7 @@ to learn how to use them.
 * [go-message](https://github.com/emersion/go-message) - parsing and formatting MIME and mail messages
 * [go-msgauth](https://github.com/emersion/go-msgauth) - handle DKIM, DMARC and Authentication-Results
 * [go-pgpmail](https://github.com/emersion/go-pgpmail) - decrypting and encrypting mails with OpenPGP
-* [go-sasl](https://github.com/emersion/go-sasl) - sending and receiving SASL authentications
+* [go-sasl](https://github.com/quzhi1/go-sasl) - sending and receiving SASL authentications
 * [go-smtp](https://github.com/emersion/go-smtp) - building SMTP clients and servers
 
 ## License

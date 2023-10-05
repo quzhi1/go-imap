@@ -4,6 +4,7 @@ package server
 import (
 	"crypto/tls"
 	"errors"
+	"github.com/quzhi1/go-imap"
 	"io"
 	"log"
 	"net"
@@ -11,10 +12,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/emersion/go-imap"
-	"github.com/emersion/go-imap/backend"
-	"github.com/emersion/go-imap/responses"
-	"github.com/emersion/go-sasl"
+	"github.com/quzhi1/go-imap/backend"
+	"github.com/quzhi1/go-imap/responses"
+	"github.com/quzhi1/go-sasl"
 )
 
 // The minimum autologout duration defined in RFC 3501 section 5.4.

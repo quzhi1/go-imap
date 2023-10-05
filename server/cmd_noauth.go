@@ -5,9 +5,9 @@ import (
 	"errors"
 	"net"
 
-	"github.com/emersion/go-imap"
-	"github.com/emersion/go-imap/commands"
-	"github.com/emersion/go-sasl"
+	"github.com/quzhi1/go-imap"
+	"github.com/quzhi1/go-imap/commands"
+	"github.com/quzhi1/go-sasl"
 )
 
 // IMAP errors in Not Authenticated state.

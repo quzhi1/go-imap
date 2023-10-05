@@ -3,9 +3,9 @@ package client
 import (
 	"errors"
 
-	"github.com/emersion/go-imap"
-	"github.com/emersion/go-imap/commands"
-	"github.com/emersion/go-imap/responses"
+	"github.com/quzhi1/go-imap"
+	"github.com/quzhi1/go-imap/commands"
+	"github.com/quzhi1/go-imap/responses"
 )
 
 var (
