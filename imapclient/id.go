@@ -7,12 +7,12 @@ import (
 	"github.com/emersion/go-imap/v2/internal/imapwire"
 )
 
-// Id sends an ID command.
+// ID sends an ID command.
 // ID command is introduced in RFC 2971.
 // An example ID command:
 // ID ("name" "go-imap" "version" "1.0" "os" "Linux" "os-version" "7.9.4" "vendor" "Yahoo")
-func (c *Client) Id(idData *imap.IdData) *IdCommand {
-	cmd := &IdCommand{}
+func (c *Client) ID(idData *imap.IDData) *IDCommand {
+	cmd := &IDCommand{}
 	enc := c.beginCommand("ID", cmd)
 
 	if idData == nil {
@@ -24,48 +24,37 @@ func (c *Client) Id(idData *imap.IdData) *IdCommand {
 	enc.SP().Special('(')
 	isFirstKey := true
 	if idData.Name != "" {
-		addIdKeyValue(enc, isFirstKey, "name", idData.Name)
-		isFirstKey = false
+		addIDKeyValue(enc, &isFirstKey, "name", idData.Name)
 	}
 	if idData.Version != "" {
-		addIdKeyValue(enc, isFirstKey, "version", idData.Version)
-		isFirstKey = false
+		addIDKeyValue(enc, &isFirstKey, "version", idData.Version)
 	}
-	if idData.Os != "" {
-		addIdKeyValue(enc, isFirstKey, "os", idData.Os)
-		isFirstKey = false
+	if idData.OS != "" {
+		addIDKeyValue(enc, &isFirstKey, "os", idData.OS)
 	}
-	if idData.OsVersion != "" {
-		addIdKeyValue(enc, isFirstKey, "os-version", idData.OsVersion)
-		isFirstKey = false
+	if idData.OSVersion != "" {
+		addIDKeyValue(enc, &isFirstKey, "os-version", idData.OSVersion)
 	}
 	if idData.Vendor != "" {
-		addIdKeyValue(enc, isFirstKey, "vendor", idData.Vendor)
-		isFirstKey = false
+		addIDKeyValue(enc, &isFirstKey, "vendor", idData.Vendor)
 	}
-	if idData.SupportUrl != "" {
-		addIdKeyValue(enc, isFirstKey, "support-url", idData.SupportUrl)
-		isFirstKey = false
+	if idData.SupportURL != "" {
+		addIDKeyValue(enc, &isFirstKey, "support-url", idData.SupportURL)
 	}
 	if idData.Address != "" {
-		addIdKeyValue(enc, isFirstKey, "address", idData.Address)
-		isFirstKey = false
+		addIDKeyValue(enc, &isFirstKey, "address", idData.Address)
 	}
 	if idData.Date != "" {
-		addIdKeyValue(enc, isFirstKey, "date", idData.Date)
-		isFirstKey = false
+		addIDKeyValue(enc, &isFirstKey, "date", idData.Date)
 	}
 	if idData.Command != "" {
-		addIdKeyValue(enc, isFirstKey, "command", idData.Command)
-		isFirstKey = false
+		addIDKeyValue(enc, &isFirstKey, "command", idData.Command)
 	}
 	if idData.Arguments != "" {
-		addIdKeyValue(enc, isFirstKey, "arguments", idData.Arguments)
-		isFirstKey = false
+		addIDKeyValue(enc, &isFirstKey, "arguments", idData.Arguments)
 	}
 	if idData.Environment != "" {
-		addIdKeyValue(enc, isFirstKey, "environment", idData.Environment)
-		isFirstKey = false
+		addIDKeyValue(enc, &isFirstKey, "environment", idData.Environment)
 	}
 
 	enc.Special(')')
@@ -73,12 +62,15 @@ func (c *Client) Id(idData *imap.IdData) *IdCommand {
 	return cmd
 }
 
-func addIdKeyValue(enc *commandEncoder, isFirstKey bool, key, value string) {
-	if !isFirstKey {
+func addIDKeyValue(enc *commandEncoder, isFirstKey *bool, key, value string) {
+	if isFirstKey == nil {
+		panic("isFirstKey cannot be nil")
+	} else if !*isFirstKey {
 		enc.SP().Quoted(key).SP().Quoted(value)
 	} else {
 		enc.Quoted(key).SP().Quoted(value)
 	}
+	*isFirstKey = false
 }
 
 func (c *Client) handleId() error {
@@ -87,15 +79,15 @@ func (c *Client) handleId() error {
 		return fmt.Errorf("in id: %v", err)
 	}
 
-	if cmd := findPendingCmdByType[*IdCommand](c); cmd != nil {
+	if cmd := findPendingCmdByType[*IDCommand](c); cmd != nil {
 		cmd.data = *data
 	}
 
 	return nil
 }
 
-func (c *Client) readId(dec *imapwire.Decoder) (*imap.IdData, error) {
-	var data = imap.IdData{}
+func (c *Client) readId(dec *imapwire.Decoder) (*imap.IDData, error) {
+	var data = imap.IDData{}
 
 	if !dec.ExpectSP() {
 		return nil, dec.Err()
@@ -123,13 +115,13 @@ func (c *Client) readId(dec *imapwire.Decoder) (*imap.IdData, error) {
 		case "version":
 			data.Version = keyOrValue
 		case "os":
-			data.Os = keyOrValue
+			data.OS = keyOrValue
 		case "os-version":
-			data.OsVersion = keyOrValue
+			data.OSVersion = keyOrValue
 		case "vendor":
 			data.Vendor = keyOrValue
 		case "support-url":
-			data.SupportUrl = keyOrValue
+			data.SupportURL = keyOrValue
 		case "address":
 			data.Address = keyOrValue
 		case "date":
@@ -157,11 +149,11 @@ func (c *Client) readId(dec *imapwire.Decoder) (*imap.IdData, error) {
 	return &data, nil
 }
 
-type IdCommand struct {
+type IDCommand struct {
 	cmd
-	data imap.IdData
+	data imap.IDData
 }
 
-func (r *IdCommand) Wait() (*imap.IdData, error) {
+func (r *IDCommand) Wait() (*imap.IDData, error) {
 	return &r.data, r.cmd.Wait()
 }

@@ -1,12 +1,12 @@
 package imap
 
-type IdData struct {
+type IDData struct {
 	Name        string
 	Version     string
-	Os          string
-	OsVersion   string
+	OS          string
+	OSVersion   string
 	Vendor      string
-	SupportUrl  string
+	SupportURL  string
 	Address     string
 	Date        string
 	Command     string
