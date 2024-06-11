@@ -17,58 +17,59 @@ func (c *Client) Id(idData *imap.IdData) *IdCommand {
 
 	if idData == nil {
 		enc.SP().NIL()
-	} else {
-		enc.SP().Special('(')
-		isFirstKey := true
-		if idData.Name != "" {
-			addIdKeyValue(enc, isFirstKey, "name", idData.Name)
-			isFirstKey = false
-		}
-		if idData.Version != "" {
-			addIdKeyValue(enc, isFirstKey, "version", idData.Version)
-			isFirstKey = false
-		}
-		if idData.Os != "" {
-			addIdKeyValue(enc, isFirstKey, "os", idData.Os)
-			isFirstKey = false
-		}
-		if idData.OsVersion != "" {
-			addIdKeyValue(enc, isFirstKey, "os-version", idData.OsVersion)
-			isFirstKey = false
-		}
-		if idData.Vendor != "" {
-			addIdKeyValue(enc, isFirstKey, "vendor", idData.Vendor)
-			isFirstKey = false
-		}
-		if idData.SupportUrl != "" {
-			addIdKeyValue(enc, isFirstKey, "support-url", idData.SupportUrl)
-			isFirstKey = false
-		}
-		if idData.Address != "" {
-			addIdKeyValue(enc, isFirstKey, "address", idData.Address)
-			isFirstKey = false
-		}
-		if idData.Date != "" {
-			addIdKeyValue(enc, isFirstKey, "date", idData.Date)
-			isFirstKey = false
-		}
-		if idData.Command != "" {
-			addIdKeyValue(enc, isFirstKey, "command", idData.Command)
-			isFirstKey = false
-		}
-		if idData.Arguments != "" {
-			addIdKeyValue(enc, isFirstKey, "arguments", idData.Arguments)
-			isFirstKey = false
-		}
-		if idData.Environment != "" {
-			addIdKeyValue(enc, isFirstKey, "environment", idData.Environment)
-			isFirstKey = false
-		}
-
-		enc.Special(')')
+		enc.end()
+		return cmd
 	}
-	enc.end()
 
+	enc.SP().Special('(')
+	isFirstKey := true
+	if idData.Name != "" {
+		addIdKeyValue(enc, isFirstKey, "name", idData.Name)
+		isFirstKey = false
+	}
+	if idData.Version != "" {
+		addIdKeyValue(enc, isFirstKey, "version", idData.Version)
+		isFirstKey = false
+	}
+	if idData.Os != "" {
+		addIdKeyValue(enc, isFirstKey, "os", idData.Os)
+		isFirstKey = false
+	}
+	if idData.OsVersion != "" {
+		addIdKeyValue(enc, isFirstKey, "os-version", idData.OsVersion)
+		isFirstKey = false
+	}
+	if idData.Vendor != "" {
+		addIdKeyValue(enc, isFirstKey, "vendor", idData.Vendor)
+		isFirstKey = false
+	}
+	if idData.SupportUrl != "" {
+		addIdKeyValue(enc, isFirstKey, "support-url", idData.SupportUrl)
+		isFirstKey = false
+	}
+	if idData.Address != "" {
+		addIdKeyValue(enc, isFirstKey, "address", idData.Address)
+		isFirstKey = false
+	}
+	if idData.Date != "" {
+		addIdKeyValue(enc, isFirstKey, "date", idData.Date)
+		isFirstKey = false
+	}
+	if idData.Command != "" {
+		addIdKeyValue(enc, isFirstKey, "command", idData.Command)
+		isFirstKey = false
+	}
+	if idData.Arguments != "" {
+		addIdKeyValue(enc, isFirstKey, "arguments", idData.Arguments)
+		isFirstKey = false
+	}
+	if idData.Environment != "" {
+		addIdKeyValue(enc, isFirstKey, "environment", idData.Environment)
+		isFirstKey = false
+	}
+
+	enc.Special(')')
+	enc.end()
 	return cmd
 }
 
@@ -115,6 +116,7 @@ func (c *Client) readId(dec *imapwire.Decoder) (*imap.IdData, error) {
 			currKey = keyOrValue
 			return nil
 		}
+
 		switch currKey {
 		case "name":
 			data.Name = keyOrValue
@@ -147,6 +149,7 @@ func (c *Client) readId(dec *imapwire.Decoder) (*imap.IdData, error) {
 
 		return nil
 	})
+
 	if err != nil {
 		return nil, err
 	}
