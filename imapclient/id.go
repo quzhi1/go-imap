@@ -62,7 +62,6 @@ func (c *Client) readId(dec *imapwire.Decoder) (*imap.IdData, error) {
 	currKey := ""
 	err := dec.ExpectList(func() error {
 		var keyOrValue string
-
 		if !dec.String(&keyOrValue) {
 			return fmt.Errorf("in id key-val list: %v", dec.Err())
 		}
@@ -94,6 +93,7 @@ func (c *Client) readId(dec *imapwire.Decoder) (*imap.IdData, error) {
 			case "environment":
 				data.Environment = keyOrValue
 			default:
+				return fmt.Errorf("unknown key: %v", currKey)
 			}
 			currKey = ""
 		}
