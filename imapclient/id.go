@@ -73,8 +73,8 @@ func addIDKeyValue(enc *commandEncoder, isFirstKey *bool, key, value string) {
 	*isFirstKey = false
 }
 
-func (c *Client) handleId() error {
-	data, err := c.readId(c.dec)
+func (c *Client) handleID() error {
+	data, err := c.readID(c.dec)
 	if err != nil {
 		return fmt.Errorf("in id: %v", err)
 	}
@@ -86,7 +86,7 @@ func (c *Client) handleId() error {
 	return nil
 }
 
-func (c *Client) readId(dec *imapwire.Decoder) (*imap.IDData, error) {
+func (c *Client) readID(dec *imapwire.Decoder) (*imap.IDData, error) {
 	var data = imap.IDData{}
 
 	if !dec.ExpectSP() {
