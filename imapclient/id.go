@@ -8,9 +8,13 @@ import (
 )
 
 // ID sends an ID command.
-// ID command is introduced in RFC 2971.
+//
+// The ID command is introduced in RFC 2971. It requires support for the ID
+// extension.
+//
 // An example ID command:
-// ID ("name" "go-imap" "version" "1.0" "os" "Linux" "os-version" "7.9.4" "vendor" "Yahoo")
+//
+//	ID ("name" "go-imap" "version" "1.0" "os" "Linux" "os-version" "7.9.4" "vendor" "Yahoo")
 func (c *Client) ID(idData *imap.IDData) *IDCommand {
 	cmd := &IDCommand{}
 	enc := c.beginCommand("ID", cmd)
