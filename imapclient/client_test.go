@@ -8,10 +8,10 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/emersion/go-imap/v2"
-	"github.com/emersion/go-imap/v2/imapclient"
-	"github.com/emersion/go-imap/v2/imapserver"
-	"github.com/emersion/go-imap/v2/imapserver/imapmemserver"
+	"github.com/quzhi1/go-imap/v2"
+	"github.com/quzhi1/go-imap/v2/imapclient"
+	"github.com/quzhi1/go-imap/v2/imapserver"
+	"github.com/quzhi1/go-imap/v2/imapserver/imapmemserver"
 )
 
 const (
@@ -230,7 +230,7 @@ func TestLogout(t *testing.T) {
 	}
 }
 
-// https://github.com/emersion/go-imap/issues/562
+// https://github.com/quzhi1/go-imap/issues/562
 func TestFetch_invalid(t *testing.T) {
 	client, server := newClientServerPair(t, imap.ConnStateSelected)
 	defer client.Close()

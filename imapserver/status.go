@@ -3,8 +3,8 @@ package imapserver
 import (
 	"strings"
 
-	"github.com/emersion/go-imap/v2"
-	"github.com/emersion/go-imap/v2/internal/imapwire"
+	"github.com/quzhi1/go-imap/v2"
+	"github.com/quzhi1/go-imap/v2/internal/imapwire"
 )
 
 func (c *Conn) handleStatus(dec *imapwire.Decoder) error {

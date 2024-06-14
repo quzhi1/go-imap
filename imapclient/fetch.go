@@ -7,10 +7,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/emersion/go-imap/v2"
-	"github.com/emersion/go-imap/v2/internal"
-	"github.com/emersion/go-imap/v2/internal/imapwire"
-	"github.com/emersion/go-message/mail"
+	"github.com/quzhi1/go-imap/v2"
+	"github.com/quzhi1/go-imap/v2/internal"
+	"github.com/quzhi1/go-imap/v2/internal/imapwire"
+	"github.com/quzhi1/go-message/mail"
 )
 
 // Fetch sends a FETCH command.
@@ -841,7 +841,7 @@ func readBodyType1part(dec *imapwire.Decoder, typ string, options *Options) (*im
 	bs.Description, _ = options.decodeText(description)
 
 	// Some servers don't include the extra fields for message and text
-	// (see https://github.com/emersion/go-imap/issues/557)
+	// (see https://github.com/quzhi1/go-imap/issues/557)
 	hasSP := dec.SP()
 	if !hasSP {
 		return &bs, nil

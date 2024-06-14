@@ -8,9 +8,9 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/emersion/go-imap/v2"
-	"github.com/emersion/go-imap/v2/internal/imapnum"
-	"github.com/emersion/go-imap/v2/internal/utf7"
+	"github.com/quzhi1/go-imap/v2"
+	"github.com/quzhi1/go-imap/v2/internal/imapnum"
+	"github.com/quzhi1/go-imap/v2/internal/utf7"
 )
 
 // This limits the max list nesting depth to prevent stack overflow.
@@ -135,7 +135,7 @@ func (dec *Decoder) Expect(ok bool, name string) bool {
 
 func (dec *Decoder) SP() bool {
 	if dec.acceptByte(' ') {
-		// https://github.com/emersion/go-imap/issues/571
+		// https://github.com/quzhi1/go-imap/issues/571
 		b, ok := dec.readByte()
 		if !ok {
 			return false
@@ -158,7 +158,7 @@ func (dec *Decoder) ExpectSP() bool {
 }
 
 func (dec *Decoder) CRLF() bool {
-	dec.acceptByte(' ')  // https://github.com/emersion/go-imap/issues/540
+	dec.acceptByte(' ')  // https://github.com/quzhi1/go-imap/issues/540
 	dec.acceptByte('\r') // be liberal in what we receive and accept lone LF
 	if !dec.acceptByte('\n') {
 		return false
@@ -322,7 +322,7 @@ func (dec *Decoder) ExpectNumber(ptr *uint32) bool {
 func (dec *Decoder) ExpectBodyFldOctets(ptr *uint32) bool {
 	// Workaround: some servers incorrectly return "-1" for the body structure
 	// size. See:
-	// https://github.com/emersion/go-imap/issues/534
+	// https://github.com/quzhi1/go-imap/issues/534
 	if dec.acceptByte('-') {
 		*ptr = 0
 		return dec.Expect(dec.acceptByte('1'), "-1 (body-fld-octets workaround)")

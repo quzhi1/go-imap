@@ -9,11 +9,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/emersion/go-imap/v2"
-	"github.com/emersion/go-imap/v2/imapserver"
-	gomessage "github.com/emersion/go-message"
-	"github.com/emersion/go-message/mail"
-	"github.com/emersion/go-message/textproto"
+	"github.com/quzhi1/go-imap/v2"
+	"github.com/quzhi1/go-imap/v2/imapserver"
+	gomessage "github.com/quzhi1/go-message"
+	"github.com/quzhi1/go-message/mail"
+	"github.com/quzhi1/go-message/textproto"
 )
 
 type message struct {

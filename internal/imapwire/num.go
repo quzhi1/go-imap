@@ -3,8 +3,8 @@ package imapwire
 import (
 	"unsafe"
 
-	"github.com/emersion/go-imap/v2"
-	"github.com/emersion/go-imap/v2/internal/imapnum"
+	"github.com/quzhi1/go-imap/v2"
+	"github.com/quzhi1/go-imap/v2/internal/imapnum"
 )
 
 type NumKind int

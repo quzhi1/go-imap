@@ -5,11 +5,11 @@ import (
 	"log"
 	"time"
 
-	"github.com/emersion/go-message/mail"
 	"github.com/emersion/go-sasl"
+	"github.com/quzhi1/go-message/mail"
 
-	"github.com/emersion/go-imap/v2"
-	"github.com/emersion/go-imap/v2/imapclient"
+	"github.com/quzhi1/go-imap/v2"
+	"github.com/quzhi1/go-imap/v2/imapclient"
 )
 
 func ExampleClient() {
