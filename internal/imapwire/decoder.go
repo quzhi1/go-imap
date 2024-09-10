@@ -206,14 +206,6 @@ func (dec *Decoder) ExpectAtom(ptr *string) bool {
 	return dec.Expect(dec.Atom(ptr), "atom")
 }
 
-func (dec *Decoder) NonEmpty(ptr *string) bool {
-	return dec.Func(ptr, IsNonEmptyChar)
-}
-
-func (dec *Decoder) ExpectNonEmpty(ptr *string) bool {
-	return dec.Expect(dec.NonEmpty(ptr), "non-empty")
-}
-
 func (dec *Decoder) ExpectNIL() bool {
 	var s string
 	return dec.ExpectAtom(&s) && dec.Expect(s == "NIL", "NIL")
