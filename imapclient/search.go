@@ -157,6 +157,11 @@ func (cmd *SearchCommand) Wait() (*imap.SearchData, error) {
 }
 
 func writeSearchKey(enc *imapwire.Encoder, criteria *imap.SearchCriteria) {
+	if criteria == nil {
+		enc.Atom("ALL")
+		criteria = &imap.SearchCriteria{}
+		return
+	}
 	enc.Special('(')
 
 	firstItem := true
@@ -361,6 +366,10 @@ func readESearchResponse(dec *imapwire.Decoder) (tag string, data *imap.SearchDa
 }
 
 func searchCriteriaIsASCII(criteria *imap.SearchCriteria) bool {
+	if criteria == nil {
+		return true
+	}
+
 	for _, kv := range criteria.Header {
 		if !isASCII(kv.Key) || !isASCII(kv.Value) {
 			return false
