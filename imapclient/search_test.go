@@ -31,4 +31,17 @@ func TestESearch(t *testing.T) {
 	if want := uint32(1); data.Count != want {
 		t.Errorf("Count = %v, want %v", data.Count, want)
 	}
+
+	data, err = client.UIDSearch(nil, nil).Wait()
+	if err != nil {
+		t.Fatalf("Search().Wait() = %v", err)
+	}
+	wantAllUIDs := []imap.UID{1}
+	allUIDs := data.AllUIDs()
+	if len(allUIDs) != 1 {
+		t.Errorf("AllUIDs() = %v, want %v", allUIDs, wantAllUIDs)
+	}
+	if allUIDs[0] != wantAllUIDs[0] {
+		t.Errorf("AllUIDs() = %v, want %v", allUIDs, wantAllUIDs)
+	}
 }
