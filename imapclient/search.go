@@ -2,6 +2,7 @@ package imapclient
 
 import (
 	"fmt"
+	"reflect"
 	"strings"
 	"time"
 	"unicode"
@@ -157,7 +158,8 @@ func (cmd *SearchCommand) Wait() (*imap.SearchData, error) {
 }
 
 func writeSearchKey(enc *imapwire.Encoder, criteria *imap.SearchCriteria) {
-	if criteria == nil {
+	emptyCriteria := imap.SearchCriteria{}
+	if criteria == nil || reflect.DeepEqual(*criteria, emptyCriteria) {
 		enc.Atom("ALL")
 		criteria = &imap.SearchCriteria{}
 		return
