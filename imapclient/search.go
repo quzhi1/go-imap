@@ -363,10 +363,6 @@ func readESearchResponse(dec *imapwire.Decoder) (tag string, data *imap.SearchDa
 }
 
 func searchCriteriaIsASCII(criteria *imap.SearchCriteria) bool {
-	if criteria == nil {
-		return true
-	}
-
 	for _, kv := range criteria.Header {
 		if !isASCII(kv.Key) || !isASCII(kv.Value) {
 			return false
