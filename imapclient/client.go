@@ -621,6 +621,9 @@ func (c *Client) readResponse() error {
 		return fmt.Errorf("in response: cannot read type: %v", c.dec.Err())
 	}
 
+	// Change typ to uppercase, as it's case-insensitive
+	typ = strings.ToUpper(typ)
+
 	var (
 		token    string
 		err      error
