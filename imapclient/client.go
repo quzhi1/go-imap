@@ -29,6 +29,7 @@ import (
 	"net"
 	"runtime/debug"
 	"strconv"
+	"strings"
 	"sync"
 	"time"
 
@@ -620,6 +621,9 @@ func (c *Client) readResponse() error {
 		return fmt.Errorf("in response: cannot read type: %v", c.dec.Err())
 	}
 
+	// Change typ to uppercase, as it's case-insensitive
+	typ = strings.ToUpper(typ)
+
 	var (
 		token    string
 		err      error
@@ -796,7 +800,8 @@ func (c *Client) readResponseData(typ string) error {
 		}
 	}
 
-	switch typ {
+	// All response type are case insensitive
+	switch strings.ToUpper(typ) {
 	case "OK", "PREAUTH", "NO", "BAD", "BYE": // resp-cond-state / resp-cond-bye / resp-cond-auth
 		// Some servers don't provide a text even if the RFC requires it,
 		// see #500 and #502
